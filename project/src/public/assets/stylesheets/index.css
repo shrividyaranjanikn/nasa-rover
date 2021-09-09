@@ -33,17 +33,40 @@ footer {
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  /* use mobile */
+  .rover-cards {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card-img-top {
+    width: 100%;
+  }
+
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
-@media (min-width: 1224px) {
-  /* use mobile */
+@media (min-width: 1024px) {
+  .rover-cards {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card-img-top {
+    width: 100%;
+  }
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: 1824px) {
-  /* use mobile */
+  .rover-cards {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card-img-top {
+    width: 100%;
+  }
 }

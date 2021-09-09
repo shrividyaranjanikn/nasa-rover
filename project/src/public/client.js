@@ -74,7 +74,7 @@ const RenderRoverCard = (state, rover) => {
         return;
     }
     return (`
-        <div class="card col-sm-6 col-md-3">
+        <div class="card">
             <img class="card-img-top" height="200px" src='${state.imageAssetsPath}/${rover.name.toLowerCase()}_card_image.jpg' alt="${rover.name} image">
             <div class="card-body">
                 <h5 class="card-title">${rover.name}</h5>
