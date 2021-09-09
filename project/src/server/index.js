@@ -37,13 +37,7 @@ app.get('/photos/:rover_name/', async (req, res) => {
         const endpoint = `${nasaApiBaseUrl}${roverPhotosUri}${req.params.rover_name}/photos?sol=1000&api_key=${process.env.API_KEY}&page=1`;
         let photos = await fetch(endpoint)
                 .then(res => res.json())
-                .then(data => data.photos.map(photo => {
-                    return {
-                        image: photo.img_src,
-                        camera: photo.camera.full_name,
-                        photo_date: photo.earth_date ?? 'Date unavailable'
-                    }
-                }))
+                .then(data => this.convertApiResponse(data.photos, this.getPhotoResponseDTOObject))
                 .then(photos => photos.length > photo_count ? photos.slice(0, photo_count+1) : photos)
         res.send(photos)
     }
@@ -51,6 +45,23 @@ app.get('/photos/:rover_name/', async (req, res) => {
         console.error("error: ", err);
     }
 })
+
+convertApiResponse = (arr, fn) => {
+    const responseArr = [];
+    arr.forEach(element => {
+        responseArr.push(fn(element))
+    });
+
+    return responseArr;
+}
+
+getPhotoResponseDTOObject = (photo) => {
+    return {
+        image: photo.img_src,
+        camera: photo.camera.full_name,
+        photo_date: photo.earth_date ?? 'Date unavailable'
+    }
+}
 
 app.get('/apod', async (req, res) => {
     try {
@@ -63,3 +74,4 @@ app.get('/apod', async (req, res) => {
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
